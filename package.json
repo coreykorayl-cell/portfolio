@@ -1,0 +1,10 @@
+{
+  "name": "corey-lightner-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dependency-free static portfolio for Corey Lightner",
+  "scripts": {
+    "dev": "python3 -m http.server 8000 --bind 0.0.0.0",
+    "build": "node scripts/build.mjs"
+  }
+}
