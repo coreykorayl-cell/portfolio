@@ -1,28 +1,29 @@
 # Corey Lightner — Creative Producer
 
-Dependency-free HTML/CSS scaffold for migrating the v1 portfolio. No framework, install step, runtime service, or external font dependency is required.
+Buildless static migration of the official v20 export (source commit `9fe15d19e55e659aa4c45f8cba6e16dd827bc1eb`). The deployable site lives in `public/`; there is no framework, dependency installation, or build step.
 
-## Local review
+## Preview
 
-Run `npm run dev`, then open `http://localhost:8000`. Requires Python 3. You can also use any static web server.
+Run `python3 -m http.server 8000 --directory public` from the repository root, then visit http://localhost:8000/. Root-relative URLs require an HTTP server.
 
-Run `npm run build` to copy the site into `dist/`. Requires Node.js 18 or newer. Build paths are relative to the repository root.
+## Hosting
 
-## Current state
+Vercel: framework preset Other, no build command, output directory `public` (configured in `vercel.json`).
 
-Includes the supplied hero copy, selected-work grid, studio section, and Journal / Prints / Resources / Support section. Responsive layouts, keyboard navigation, reduced-motion support, metadata, and favicon are included.
+Netlify: no build command, publish directory `public` (configured in `netlify.toml`).
 
-This is a scaffold, not an exact reproduction of v1. The hosted v1 could not be fetched because the environment's outbound policy blocks its hostname. Colors, typography, graphic studies, and layout are provisional. Project cards explicitly identify missing content. Their details remain visible on touch devices; decorative hover effects are optional. The studio link temporarily points to v1. The four content areas are noninteractive until real destinations are provided. No contact address or project credentials have been invented.
+No deployment or DNS change is authorized for this migration. Review the complete site before connecting hosting or changing the domain.
 
-See [the migration checklist](docs/MIGRATION.md) for the exact export request and remaining inputs.
+## Migration status
 
-## Deploy after review
+All 13 routes and the exported HTML/CSS/JS are imported. See `docs/v1-export/` for the original inventory, behavior guide, integration notes, and checksum manifest. Those documents describe the original complete export; they are preserved as references and do not override the current request.
 
-Both hosts serve the same `dist/` directory. No deployment has been made.
+All 140 deployable files are assembled, including all 97 media files. 139 files match the export's SHA-256 manifest exactly. The sole intentional difference is `home.js`: reduced-motion preferences suppress video/YouTube hover previews, matching the export behavior guide. No scaffold placeholder content remains.
 
-- **Netlify:** Import this repository. `netlify.toml` supplies build command `npm run build` and publish directory `dist`.
-- **Vercel:** Import this repository, choose framework preset **Other**, build command `npm run build`, and output directory `dist`. `vercel.json` supplies these defaults.
+The two homepage reference screenshots and original ChatGPT hosting manifest listed in the export were not supplied. The site uses the Vercel and Netlify configurations in this repository instead; no site media is missing. See [verification details](docs/MIGRATION_VERIFICATION.md).
 
-Use the host's temporary URL to review before adding a domain. Check current free-plan eligibility and limits, particularly commercial-use terms, before choosing a host for the portfolio.
+All original internal and external links are retained. The source inventory specifies no redirects; no custom redirects or SPA fallback have been added. Each route is served from its own directory's `index.html`.
 
-After approval, add `coreylightner.com` and `www.coreylightner.com` in the chosen host's domain settings. Choose the apex as primary and redirect www to it. At your domain's DNS provider, apply the exact records shown by that host; do not guess IP addresses or overwrite email/MX/TXT records. Wait for DNS verification and HTTPS provisioning, then verify both names. No registrar credentials are needed in chat. Add the canonical URL, social preview image, sitemap, and indexing policy once final routes and launch content are approved.
+Preserved behaviors include mobile navigation, project hover/focus previews and filters, scroll reveals, portrait rotation and pause/advance controls, video playback, and responsive galleries. JavaScript syntax and all 271 local HTML/CSS references pass verification. Browser layout, live third-party embeds, and media playback have not been interactively verified.
+
+Third-party embeds and remote fallback images remain external as in v1. No backend, analytics, forms service, secrets, or font downloads are required.
